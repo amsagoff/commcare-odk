@@ -139,6 +139,13 @@ public class CommCareApp {
         ResourceTable upgrade = platform.getUpgradeResourceTable();
         ResourceTable recovery = platform.getRecoveryTable();
         
+        //In case this app's ApplicationRecord came from an old version and these
+        //fields are null, reset them here (will pull them from the Profile)
+        record.setUniqueId(getUniqueId());
+        record.setDisplayName(getDisplayName());
+        //For the same reason, resourceStatus may be incorrect
+        record.setResourcesStatus(areResourcesValidated());
+        
         System.out.println("Global");
         System.out.println(global.toString());
         
