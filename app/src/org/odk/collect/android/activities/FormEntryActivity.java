@@ -2077,8 +2077,8 @@ public class FormEntryActivity extends FragmentActivity implements AnimationList
      *                        violate constraints be saved.
      * @return Did the data save successfully?
      */
-    private boolean saveDataToDisk(boolean exit, boolean complete,
-                                   String updatedSaveName, boolean headless) {
+    private void saveDataToDisk(boolean exit, boolean complete,
+                                String updatedSaveName, boolean headless) {
         if (!formHasLoaded()) {
             return;
         }
@@ -2087,13 +2087,13 @@ public class FormEntryActivity extends FragmentActivity implements AnimationList
         // before doing so.
         if (headless &&
                 (!saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS, complete, headless))) {
-            return false;
+            return;
         } else if (!headless &&
                 !saveAnswersForCurrentScreen(EVALUATE_CONSTRAINTS, complete, headless)) {
             Toast.makeText(this,
                     StringUtils.getStringSpannableRobust(this, R.string.data_saved_error),
                     Toast.LENGTH_SHORT).show();
-            return false;
+            return;
         }
 
         mSaveToDiskTask =
